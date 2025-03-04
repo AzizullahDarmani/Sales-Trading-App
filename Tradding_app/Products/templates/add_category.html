@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="add-category-container">
+        <h2>Add a New Category</h2>
+        
+        <form method="POST" class="category-form">
+            {% csrf_token %}
+            {{ category_form.as_p }}
+
+            <button type="submit" class="submit-btn">Add Category</button>
+        </form>
+    </div>
+
+    <style>
+        
+        .add-category-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 50px;
+            background: rgb(215, 238, 255);
+            border-radius: 10px;
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .category-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-form input,
+        .category-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .submit-btn:hover {
+            background: #2980b9;
+        }
+    </style>
+
+{% endblock %}

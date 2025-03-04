@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="delete-container">
+        <h2>Are you sure you want to delete <span>{{ product.name }}</span>?</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn delete-btn">Yes, Delete</button>
+            <a href="{% url 'product_list' %}" class="btn cancel-btn">Cancel</a>
+        </form>
+    </div>
+
+    <style>
+        .delete-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 60px;
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        h2 span {
+            color: #d8980b;
+            font-weight: bold;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+        }
+
+        .delete-btn {
+            background: #ffcc00;
+            color: white;
+            width: 430px; 
+            font-family:'Times New Roman', Times, serif;
+        }
+
+        .delete-btn:hover {
+            background: #f4c324;
+        }
+
+        .cancel-btn {
+            background:  #3498db;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #17a2ff;
+        }
+    </style>
+{% endblock %}

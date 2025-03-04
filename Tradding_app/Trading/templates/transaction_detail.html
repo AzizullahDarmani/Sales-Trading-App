@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<div class="transaction-container">
+    <h2>Update Transaction</h2>
+    <form method="post"  class="product-form">
+        {% csrf_token %}
+        {{ form.as_p }} 
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+

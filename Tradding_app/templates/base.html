@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EasyBuy{% endblock %}</title>
+    <style>
+        body {
+            
+            font-family: 'Times New Roman', Times, serif; 
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin: 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color:#e7bb0c
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: #f1c40f;
+        }
+
+        main {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>EasyBuy Online Shopping</h1>
+        <nav>
+            <a href="{% url 'Logout' %}">Logout</a> |
+            
+            <a href="{% url 'product_list' %}">Products</a> |
+            <a href="{% url 'order_list' %}"> Sold Products </a> |
+            <a href="{% url 'about_us' %}"> About EasyBuy </a> |
+            {% if request.session.user_role == "product_owner" %}
+                <a href="{% url 'add_product' %}"> Add New Product </a> |
+                <a href="{% url 'add_category' %}">Add Category </a> |
+            {% endif %}
+            <a href="{% url 'HomeView' %}"> Home</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Child templates will insert content here -->
+        {% endblock %}
+    </main>
+
+</body>
+</html>

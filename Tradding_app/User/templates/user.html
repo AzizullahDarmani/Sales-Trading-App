@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="register-container">
+        <h2>Register</h2>
+        <form method="post"  class="product-form">
+            {% csrf_token %}
+            {{ form.as_p }} 
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'SignIn' %}">Sign In</a></p>
+    </div>
+
+    <style>
+        .register-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 100px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-form input,
+        .product-form select{
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            color: white;
+            background: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: #05b4ff;
+        }
+
+        p {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}

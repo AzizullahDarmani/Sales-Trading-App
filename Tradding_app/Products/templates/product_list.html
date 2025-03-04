@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="product-container">
+        <h2>List of Products</h2>
+
+        <!-- Category Filter Form -->
+        <form method="GET" action="{% url 'product_list' %}" class="filter-form">
+            <label for="category">Filter by Category:</label>
+            <select name="category" id="category" onchange="this.form.submit()">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+
+        <!-- Flash Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Product List -->
+        <div class="product-list">
+            {% for product in products %}
+                <div class="product-card">
+                    <!-- Product Image -->
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{% static 'images/default.jpg' %}" alt="No Image Available">
+                    {% endif %}
+
+                    <div class="product-details">
+                        <h3>{{ product.name }}</h3>
+                        <p><strong>Category:</strong> {{ product.category.name }}</p>
+                        <p><strong>Price:</strong> ${{ product.price }}</p>
+                        <p>{{ product.description }}</p>
+
+                        <!-- Buttons for Customers -->
+                        {% if request.session.user_role == "customer" %}
+                            <a href="{% url 'sales_view' product.id %}" class="btn buy-btn">Buy Product</a>
+                        {% endif %}
+
+                        <!-- Buttons for Product Owners -->
+                        {% if request.session.user_role == "product_owner" %}
+                            <a href="{% url 'delete_product' product.id %}" class="btn delete-btn">Delete</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <p class="no-products">No products available.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <style>
+        .filter-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-form label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .filter-form select {
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .product-container {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product-card {
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: left;
+            padding: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product-details h3 {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #444;
+        }
+
+        .product-details p {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin-top: 10px;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .buy-btn {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .buy-btn:hover {
+            background: #27ae60;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        .no-products {
+            font-size: 18px;
+            color: #888;
+        }
+    </style>
+{% endblock %}

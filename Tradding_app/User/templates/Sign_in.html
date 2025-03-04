@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="signin-container">
+        <h2>Sign In</h2>
+        <form method="post" class="product-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <style>
+        .signin-container {
+            max-width: 500px;
+            margin:  auto;
+            padding: 100px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 30px;
+            margin: 5px 0 1px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .product-form input,
+        .product-form select{
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input {
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            background: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+    </style>
+{% endblock %}

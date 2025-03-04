@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+
+    <div class="homepage-container">
+        <h2 class="homepage-title">Welcome To <span>EasyBuy Online Store</span> 😊</h2>
+        <p class="homepage-subtitle">Your one-stop shop for seamless online shopping and selling.</p>
+        <div class="homepage-button-container">
+            <a href="{% url 'UserView' %}" class="homepage-btn">Sign Up</a>
+            <a href="{% url 'SignIn' %}" class="homepage-btn">Sign In</a>
+        </div>
+    </div>
+{% endblock %}
