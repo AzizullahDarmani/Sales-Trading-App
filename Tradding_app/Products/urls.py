@@ -10,6 +10,3 @@ urlpatterns = [
     path('delete-product/<int:id>/', delete_product, name='delete_product' ),
 ]
 
-
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

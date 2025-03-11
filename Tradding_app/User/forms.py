@@ -1,18 +1,8 @@
-# from django import forms
-# from .models import User
-
-# class UserForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ['full_name', 'username', 'email', 'role']
-
-
-
 from django import forms
 from .models import User
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)  # Secure input field
+    password = forms.CharField(widget=forms.PasswordInput) 
     class Meta:
         model = User
         fields = ['full_name', 'username', 'email','password', 'role']

@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import UserForm, LoginForm
-# new imports
 from django.contrib.auth.decorators import login_required 
-from django.contrib import messages # this is used to provide a message to inform the user about the issue
-from django.contrib.auth import login, authenticate, logout # to make the authentication work we need these imports with redirect
+from django.contrib import messages 
+from django.contrib.auth import login, authenticate, logout 
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
@@ -17,45 +16,9 @@ def HomeView(request):
 
 
 def LogoutView(request):
-    request.session.flush()  # Clear session
+    request.session.flush()  
     return redirect('SignIn')
 
-
-
-# Extra 
-# def registerUser(request):
-#     page = 'register' 
-#     form = CustomUserCreationForm()  # this is a user creation form which is a built-in form in django
-
-#     if request.method == "POST":
-#         form = CustomUserCreationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=False) 
-#             user.username = user.username.lower()
-#             user.save()
-
-#             messages.success(request, "Account was created!")
-
-#             login(request, user)
-#             return redirect('edit-account')
-#         else:
-#             messages.error(request, 'An error has occured during the registration')
-
-#     context = {'page': page, 'form': form}
-#     return render(request, 'users/login_register.html', context )
-
-
-
-# works 
-# def UserView(request):  # Sign up function 
-#     if request.method == 'POST':
-#         form = UserForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('UserView')
-#     else:
-#         form = UserForm() 
-#     return render(request, 'user.html', {'form':form})
 
 
 
@@ -64,9 +27,9 @@ def UserView(request):
         form = UserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.password = make_password(form.cleaned_data['password'])  # Hash password
+            user.password = make_password(form.cleaned_data['password']) 
             user.save()
-            request.session['user_id'] = user.id  # Manual authentication
+            request.session['user_id'] = user.id  
             return redirect('SignIn')
     else:
         form = UserForm()
@@ -75,9 +38,6 @@ def UserView(request):
 
 
 
-
-# def SignIn(request):
-#     return render(request, 'Sign_in.html')
 
 
 def SignIn(request):

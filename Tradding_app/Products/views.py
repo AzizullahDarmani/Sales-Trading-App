@@ -15,10 +15,6 @@ def add_product(request):
     
     return render(request, 'add_product.html', {'product_form':product_form})
 
-# works 
-# def product_list(request):
-#     products = Product.objects.all()
-#     return render(request, 'product_list.html' , {'products': products} )
 
 
 def product_list(request):
